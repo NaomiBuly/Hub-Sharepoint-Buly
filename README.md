@@ -3,392 +3,1135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Buly 1803 — Global Retail Hub</title>
-    <style>
-        
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;600&family=Old+Standard+TT:wght@400;700&display=swap');
-    :root {
-        --font-logo: 'Old Standard TT', serif;
-        --font-serif: 'Playfair Display', serif;
-        --font-sans: 'Montserrat', sans-serif;
-    }
-
-        body {
-            font-family: var(--font-sans); margin: 0; background-color: #fbfbfb; color: #333333;
-        }
-        .top-banner {
-            background-color: #111111; color: #f5f5f5; display: flex; height: 40px; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 11px; text-transform: uppercase;
-        }
-        .top-banner-icon { width: 15px; height: 15px; display: inline-block; vertical-align: middle; margin-right: 5px; }
-        .header {
-            background-color: #ffffff; padding: 20px; display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid #ddd;
-        }
-        .header-top { display: flex; justify-content: center; width: 100%; max-width: 1200px; align-items: center; }
-        .header-top .logo { font-family: var(--font-logo); font-size: 28px; color: #600020; text-decoration: none; }
-        .header-top .icons { display: flex; gap: 15px; font-size: 16px; margin-left: 20px; }
-        .header-top .icons svg { width: 16px; height: 16px; }
-        .nav { display: flex; gap: 20px; margin-top: 20px; font-size: 12px; text-transform: uppercase; }
-        .nav div { cursor: pointer; color: #333333; }
-        .nav div.active { font-weight: 600; border-bottom: 2px solid #c79a47; }
-        
-        /* Hero */
-        .hero {
-            background-color: #600020; color: #f5f5f5; padding: 80px 20px; display: none; flex-direction: column; align-items: flex-start; max-width: 1000px; margin: 20px auto; border-radius: 8px;
-        }
-        .hero.active { display: flex; }
-        .hero h1 { font-family: var(--font-serif); font-size: 42px; font-weight: 400; color: white; margin-top: 0; text-transform: uppercase; }
-        .hero .icon { width: 80px; height: 80px; margin-bottom: 20px; }
-        .hero .content { max-width: 600px; text-align: left; }
-        .hero button { margin-top: 30px; background-color: #00301a; color: #f5f5f5; border: none; padding: 12px 30px; font-size: 13px; font-family: var(--font-sans); text-transform: uppercase; cursor: pointer; border-radius: 4px; }
-        
-        /* Main pages structure */
-        .app-page { display: none; padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
-        .app-page.active { display: block; }
-        .app-page .content { max-width: 800px; margin: 0 auto; }
-        .app-page .content-title { font-family: var(--font-serif); font-size: 30px; font-weight: 400; margin-top: 0; color: #600020; }
-        .app-page .content-text { color: #333333; line-height: 1.6; margin-bottom: 30px; }
-
-        /* Re-styled Cards */
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
-        .card { background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: left; display: flex; flex-direction: column; }
-        .card .icon { width: 60px; height: 60px; margin-bottom: 15px; align-self: center; }
-        .card h3 { font-family: var(--font-sans); color: #600020; font-size: 16px; font-weight: 600; margin-top: 0; }
-        .card p { font-size: 12px; color: #666; line-height: 1.5; margin-bottom: 15px; }
-        .card .links { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #ddd; padding-top: 15px; font-size: 12px; }
-        .card .links a { text-decoration: none; color: #c79a47; font-weight: 600; text-transform: uppercase; }
-        .card .links a:hover { text-decoration: underline; }
-        .card button { text-align: left; background: none; border: none; padding: 0; font-family: var(--font-sans); text-transform: uppercase; font-size: 12px; color: #c79a47; font-weight: 600; cursor: pointer; }
-        .card button:hover { text-decoration: underline; }
-
-        /* NSO Checklist */
-        .nso-checklist { list-style: none; padding: 0; margin-top: 20px; }
-        .nso-checklist li { display: flex; align-items: center; padding: 10px 15px; background: white; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .nso-checklist input[type="checkbox"] { margin-right: 15px; width: 16px; height: 16px; border: 1px solid #ddd; border-radius: 3px; accent-color: #c79a47; }
-        .progress-bar { width: 100%; height: 10px; background: #eee; border-radius: 5px; overflow: hidden; margin: 15px 0 30px 0; }
-        .progress-fill { width: 0%; height: 100%; background: #00301a; transition: width 0.3s ease; }
-        .progress-text { font-size: 12px; font-weight: 600; text-align: center; color: #555; }
-
-        /* Directories */
-        .directory-section { margin-top: 30px; }
-        .search-bar { margin-bottom: 20px; max-width: 400px; display: flex; }
-        .search-bar input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: var(--font-sans); }
-        .contact-tile { background: white; padding: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); font-size: 13px; text-align: left; }
-        .contact-tile strong { color: #600020; font-weight: 600; display: block; }
-        .contact-tile .contact { color: #c79a47; margin-top: 5px; display: block; }
-        .contact-tile button { margin-top: 10px; width: 100%; text-align: center; background: none; border: 1px solid #c79a47; padding: 8px; color: #c79a47; text-transform: uppercase; font-weight: 600; cursor: pointer; }
-        .product-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-        .product-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); font-size: 13px; }
-        .product-list li strong { color: #600020; font-weight: 600; }
-        .product-list li .contact { color: #777; }
-
-        /* Footer */
-        .footer { background: #333333; color: #aaa; padding: 20px; text-align: center; font-size: 11px; margin-top: 50px; text-transform: uppercase; }
-
-        /* Modals */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
-        .modal-content { background-color: #ffffff; margin: 15% auto; padding: 30px; border: 1px solid #888; width: 400px; border-radius: 8px; text-align: left; position: relative; }
-        .modal-content h2 { font-family: var(--font-sans); font-weight: 600; font-size: 18px; color: #600020; margin-top: 0; }
-        .close-modal { color: #aaa; position: absolute; right: 20px; top: 20px; font-size: 20px; font-weight: bold; cursor: pointer; }
-        .close-modal:hover { color: black; }
-
-    </style>
-</head>
-<body>
-    <div class="top-banner">
-        <div><span class="top-banner-icon"><svg viewBox="0 0 100 100" fill="#600020"><circle cx="50" cy="50" r="48"></circle><text x="50" y="65" text-anchor="middle" font-size="30" fill="#c79a47" font-family="'Old Standard TT', serif">Buly</text></svg></span> ANNOUNCEMENT: NEW GLOBAL PARTNERSHIP & EXCLUSIVE RELEASES</div>
-        <div>GLOBAL SUPPORT CENTRE <a href="#" style="color: #c79a47; margin-left: 5px; text-decoration: none;">LEARN MORE</a></div>
-    </div>
+    <title>Maison Buly 1803 — Global Retail & Store Opening Hub</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <div class="header">
-        <div class="header-top">
-            <a href="#" class="logo" data-link="home">Officine Universelle Buly</a>
-            <div class="icons">
-                <a href="#">
-        <svg viewBox="0 0 100 100" fill="none" stroke="#333333"><circle cx="50" cy="45" r="15"></circle><path d="M50 75C60 75 70 80 75 85H25C30 80 40 75 50 75Z"></path></svg>
-        <svg viewBox="0 0 100 100" fill="none" stroke="#333333"><circle cx="45" cy="45" r="30"></circle><line x1="70" y1="70" x2="90" y2="90" stroke-width="2"></line></svg>
-        <svg viewBox="0 0 100 100" fill="none" stroke="#333333"><path d="M15 15L85 15V85L15 85V15Z"></path><line x1="30" y1="15" x2="30" y2="85"></line><line x1="70" y1="15" x2="70" y2="85"></line><line x1="15" y1="40" x2="85" y2="40"></line></svg>
-    </a> <!-- search, account, basket simulated -->
-            </div>
-        </div>
-        <div class="nav">
-            <div data-link="home">Home</div>
-            <div data-link="essence">Brand Essence</div>
-            <div data-link="products">Products & Education</div>
-            <div data-link="merch">VM & Design</div>
-            <div data-link="ops">Operations</div>
-            <div data-link="nso">NSO Checklist</div>
-            <div data-link="support">Support</div>
-        </div>
-    </div>
-    
-    <main>
-        
-    <div id="home" class="hero app-page">
-        <div class="icon"><svg viewBox="0 0 100 100" fill="#600020"><path d="M50 0C36.2 0 25 11.2 25 25V30H20C17.2 30 15 32.2 15 35V95C15 97.8 17.2 100 20 100H80C82.8 100 85 97.8 85 95V35C85 32.2 82.8 30 80 30H75V25C75 11.2 63.8 0 50 0Z"></path><rect x="40" y="35" width="20" height="50" fill="#c79a47"></rect></svg></div>
-        <div class="content">
-            <h1>GLOBAL RETAIL & STORE OPENING HUB</h1>
-            <p class="content-text">
-                The Global Retail & Store Opening Hub is proud to present your curated roadmap: from Merchandising to Human Resources. Curated by our worldwide teams, it ensures a seamless journey to your next boutique opening. Discover the art of Buly worldwide.
-            </p>
-            <button>EXPLORE THE ROADMAP →</button>
-        </div>
-    </div>
-
-    <div id="essence" class="app-page">
-        <div class="content">
-            <h1 class="content-title">THE ESSENCE OF EXCELLENCE</h1>
-            <p class="content-text">Dive into the history, visual codes, and values of Officine Universelle Buly, curated for worldwide team integration.</p>
-    <div class='card-grid'>
-                <div class="card">
-                    <div class="icon"><svg viewBox="0 0 100 100" fill="#600020"><circle cx="50" cy="50" r="48"></circle><text x="50" y="65" text-anchor="middle" font-size="30" fill="#c79a47" font-family="'Old Standard TT', serif">Buly</text></svg></div>
-                    <h3>History, Values, Tone of Voice</h3>
-                    <p>Description placeholder...</p>
-                    <div class="links">
-                <a href='#'>DOWNLOAD PDF GUIDE</a><span class='contact'>CONTACT: HR Dept.</span></div></div>
-                <div class="card">
-                    <div class="icon"><svg viewBox="0 0 100 100" fill="#600020"><circle cx="50" cy="50" r="48"></circle><text x="50" y="65" text-anchor="middle" font-size="30" fill="#c79a47" font-family="'Old Standard TT', serif">Buly</text></svg></div>
-                    <h3>Logos, Typography, Color Codes</h3>
-                    <p>Description placeholder...</p>
-                    <div class="links">
-                <span class='contact'>CONTACT: Comms Team</span></div></div>
-                <div class="card">
-                    <div class="icon"><svg viewBox="0 0 100 100" fill="#600020"><circle cx="50" cy="50" r="48"></circle><text x="50" y="65" text-anchor="middle" font-size="30" fill="#c79a47" font-family="'Old Standard TT', serif">Buly</text></svg></div>
-                    <h3>Visual Identity &amp; Assets</h3>
-                    <p>Description placeholder...</p>
-                    <div class="links">
-                <span class='contact'>CONTACT: Comms Team</span></div></div></div></div></div>
-    <div id="products" class="app-page">
-        <div class="content">
-            <h1 class="content-title">SALES &amp; EDUCATION</h1>
-            <p class="content-text">Access catalogs, memo sheets, quality procedures, and training schedules.</p>
-    
-        <div class="search-bar directory-section">
-            <input type="text" id="productSearchInput" placeholder="Search productFACTSHEETS...">
-        </div>
-        <ul class="product-list" id="products">
-        <li><strong>Current Product Catalog</strong> <span class='contact'>Retail Ops</span></li><li><strong>Factsheets &amp; Pitching</strong> <span class='contact'>Training &amp; Ed.</span></li><li><strong>Quality &amp; Batch Mgmt</strong> <span class='contact'>QA Team</span></li><li><strong>Annual Training Schedule</strong> <span class='contact'>Training &amp; Ed.</span></li></ul></div></div>
-    <div id="merch" class="app-page">
-        <div class="content">
-            <h1 class="content-title">VM &amp; DESIGN STANDARDS</h1>
-            <p class="content-text">Planograms, POSM catalogs, and technical guides for in-store tools.</p>
-    <div class='card-grid'>
-            <div class="card">
-                <div class="icon"><svg viewBox="0 0 100 100" fill="none" stroke="#00301a"><rect x="10" y="10" width="80" height="80" rx="5"></rect><line x1="10" y1="30" x2="90" y2="30"></line><line x1="30" y1="30" x2="30" y2="90"></line><line x1="70" y1="30" x2="70" y2="90"></line></svg></div>
-                <h3>In-Store Display Guidelines</h3>
-                <p>Description placeholder...</p>
-                <div class="links">
-            <span class='contact'>CONTACT: Global VM Team</span></div></div>
-            <div class="card">
-                <div class="icon"><svg viewBox="0 0 100 100" fill="none" stroke="#00301a"><rect x="10" y="10" widthI have updated the visual language and color palette of your SharePoint site mockup to align precisely with the official Maison Buly website from the image provided. This is now a source unique of truth for your internal teams.
-
-### Source Unique de Vérité (Single Source of Truth)
-Ce site SharePoint n'est pas seulement un exemple, mais une structure **source unique** de toutes les informations critiques. Il garantit que chaque département et boutique utilise les mêmes directives et standards, consolidant ainsi la conformité et l'identité de la Maison Buly dans le monde entier.
-
-Voici le code HTML complet et interactif, utilisant les couleurs spécifiques (Bordeaux `#600020`, Or, Vert forêt) et la typographie élégante de votre site officiel. Vous pouvez enregistrer ce code dans un fichier `Buly_SourceUnique_SharePoint.html` et l'ouvrir dans n'importe quel navigateur.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Buly 1803 — Global Retail Source Unique</title>
-    <style>
-        @import url('[https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;600&family=Old+Standard+TT:wght@400;700&display=swap](https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;600&family=Old+Standard+TT:wght@400;700&display=swap)');
-        
-        :root {
-            --buly-burgundy: #600020; /* From reference image */
-            --buly-gold: #c79a47;
-            --buly-green: #00301a; /* From Green buttons in reference */
-            --text-light: #f5f5f5;
-            --text-dark: #333333;
-            --bg-top-banner: #111111;
-            --bg-body: #fbfbfb;
-            --bg-card: #ffffff;
-            --font-logo: 'Old Standard TT', serif;
-            --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Montserrat', sans-serif;
-        }
-
-        body { font-family: var(--font-sans); margin: 0; background-color: var(--bg-body); color: var(--text-dark); }
-        a { text-decoration: none; color: inherit; transition: color 0.3s; }
-        ul { list-style: none; padding: 0; margin: 0; }
-
-        /* Top Banner */
-        .top-banner { background-color: var(--bg-top-banner); color: var(--text-light); display: flex; height: 40px; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 11px; text-transform: uppercase; font-weight: 300; letter-spacing: 1px;}
-        .top-banner a:hover { color: var(--buly-gold); }
-
-        /* Header */
-        .header { background-color: var(--bg-card); padding: 25px 20px; display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        .header-top { display: flex; justify-content: center; width: 100%; max-width: 1200px; align-items: center; position: relative; }
-        .logo { font-family: var(--font-logo); font-size: 32px; color: var(--buly-burgundy); font-weight: 400; letter-spacing: -1px; }
-        .header-icons { display: flex; gap: 20px; position: absolute; right: 0; }
-        .header-icons svg { width: 18px; height: 18px; fill: var(--text-dark); cursor: pointer; }
-        .header-icons svg:hover { fill: var(--buly-burgundy); }
-
-        /* Navigation */
-        .nav { display: flex; gap: 30px; margin-top: 25px; font-size: 12px; text-transform: uppercase; font-weight: 300; letter-spacing: 1.5px; border-top: 1px solid #eee; padding-top: 15px; width: 100%; justify-content: center;}
-        .nav-item { cursor: pointer; color: var(--text-dark); padding-bottom: 5px; border-bottom: 2px solid transparent; transition: all 0.3s; }
-        .nav-item:hover, .nav-item.active { color: var(--buly-burgundy); border-bottom: 2px solid var(--buly-gold); font-weight: 400;}
-
-        /* Main Content */
-        main { padding: 40px 20px; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;}
-
-        /* Hero / Source Unique Banner */
-        .hero { background-color: var(--buly-burgundy); color: white; padding: 80px 40px; border-radius: 8px; text-align: left; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 30px rgba(96,0,32,0.2);}
-        .hero h1 { font-family: var(--font-serif); font-size: 48px; font-weight: 400; margin: 0; line-height: 1.1; text-transform: uppercase; letter-spacing: -1px;}
-        .hero p { max-width: 700px; font-weight: 300; font-size: 16px; line-height: 1.6; color: var(--text-light);}
-        .source-tag { background-color: var(--buly-gold); color: var(--buly-burgundy); padding: 5px 15px; text-transform: uppercase; font-size: 10px; font-weight: 600; letter-spacing: 2px; border-radius: 20px; align-self: flex-start; }
-
-        /* Page Structure */
-        .app-page { display: none; }
-        .app-page.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .content-header { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 20px;}
-        .content-title { font-family: var(--font-serif); font-size: 36px; font-weight: 400; color: var(--buly-burgundy); margin: 0; text-transform: uppercase;}
-        .content-subtitle { font-size: 14px; color: #777; font-weight: 300; margin-top: 5px;}
-
-        /* Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-
-        /* Cards */
-        .card { background-color: var(--bg-card); padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #eee; transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; gap: 15px;}
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
-        .card-icon { width: 50px; height: 50px; margin-bottom: 10px;}
-        .card-icon svg { width: 100%; height: 100%; fill: var(--buly-burgundy); }
-        .card h3 { font-size: 18px; font-weight: 600; color: var(--buly-burgundy); margin: 0; font-family: var(--font-sans); }
-        .card p { font-size: 13px; color: #666; font-weight: 300; margin: 0; line-height: 1.6; }
-        .card-footer { border-top: 1px solid #eee; padding-top: 15px; margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
-        .card-contact { color: var(--buly-gold); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;}
-        .card-action { color: var(--buly-burgundy); font-weight: 600; text-transform: uppercase;}
-        .card-action:hover { color: var(--buly-green);}
-
-        /* Buttons (adapted from green button in reference) */
-        .btn { background-color: var(--buly-green); color: white; border: none; padding: 12px 25px; text-transform: uppercase; font-size: 12px; font-weight: 600; letter-spacing: 2px; border-radius: 4px; cursor: pointer; transition: background-color 0.3s; display: inline-block; text-align: center; font-family: var(--font-sans);}
-        .btn:hover { background-color: #004d2a; }
-
-        /* Footer */
-        .footer { background-color: var(--bg-top-banner); color: #aaa; padding: 30px 20px; text-align: center; font-size: 11px; text-transform: uppercase; font-weight: 300; letter-spacing: 1px; margin-top: auto;}
-
-        /* NSO Checklist (Example) */
-        .check-item { background: white; padding: 15px; margin-bottom: 10px; border-radius: 4px; display: flex; align-items: center; gap: 15px; border: 1px solid #eee;}
-        .check-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--buly-burgundy); }
-        .check-item.done span { text-decoration: line-through; color: #aaa; }
-
-    </style>
-</head>
-<body>
-
-    <!-- Top Banner -->
-    <div class="top-banner">
-        <div>OFFICINE UNIVERSELLE BULY — SINCE 1803</div>
-        <div>GLOBAL PARTNERSHIP SUPPORT CENTRE <a href="#" style="margin-left: 10px;">LEARN MORE</a></div>
-    </div>
-
-    <!-- Header -->
-    <header class="header">
-        <div class="header-top">
-            <a href="#" class="logo">Officine Universelle Buly</a>
-            <div class="header-icons">
-                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.9 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-            </div>
-        </div>
-        <nav class="nav">
-            <div class="nav-item active" onclick="showPage('home')">Home</div>
-            <div class="nav-item" onclick="showPage('essence')">Brand Essence</div>
-            <div class="nav-item" onclick="showPage('merch')">Merchandising</div>
-            <div class="nav-item" onclick="showPage('ops')">Operations</div>
-            <div class="nav-item" onclick="showPage('nso')">Opening Hub (NSO)</div>
-            <div class="nav-item" onclick="showPage('support')">Support</div>
-        </nav>
-    </header>
-
-    <main>
-
-        <!-- Page 1: Home/Hero (Source Unique Focus) -->
-        <div id="home" class="app-page active">
-            <div class="hero">
-                <div class="source-tag">SOURCE UNIQUE DE VÉRITÉ</div>
-                <h1>GLOBAL RETAIL & STORE OPENING HUB</h1>
-                <p>Welcome to the Officine Universelle Buly internal ecosystem. This hub is the **single source of truth** (Source Unique) for all operational guidelines, brand assets, and training materials. Ensuring consistency worldwide begins here. Access the roadmap to elegance.</p>
-                <button class="btn" onclick="showPage('nso')">ACCESS OPENING ROADMAP →</button>
-            </div>
-        </div>
-
-        <!-- Page 2: Brand Essence (Example) -->
-        <div id="essence" class="app-page">
-            <div class="content-header">
-                <h1 class="content-title">BRAND ESSENCE & IDENTITY</h1>
-                <p class="content-subtitle">Source unique for core values and graphical codes.</p>
-            </div>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 100 100"><path d="M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 90C27.9 90 10 72.1 10 50S27.9 10 50 10s40 17.9 40 40-17.9 40-40 40zm10-55.6V65h-5V34.4h5zm-1.5-10c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5z"/></svg></div>
-                    <h3>History & Tone of Voice</h3>
-                    <p>Access the definitive guide on the brand’s history since 1803 and the core courtesy values.</p>
-                    <div class="card-footer">
-                        <span class="card-contact">CONTACT: HR</span>
-                        <a href="#" class="card-action">Download Guide</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 100 100"><path d="M90 10H10C4.5 10 0 14.5 0 20v60c0 5.5 4.5 10 10 10h80c5.5 0 10-4.5 10-10V20c0-5.5-4.5-10-10-10zM10 80V20h80v60H10zM50 35a15 15 0 1 0 0 30 15 15 0 0 0 0-30zm0 25a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"/></svg></div>
-                    <h3>Visual Identity & Logos</h3>
-                    <p>Official graphical codes, approved fonts, color palettes, and logo usage guidelines.</p>
-                    <div class="card-footer">
-                        <span class="card-contact">CONTACT: Comm</span>
-                        <a href="#" class="card-action">Access Assets</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Additional placeholder pages (merch, ops, nso, support) ... -->
-        <div id="nso" class="app-page">
-            <div class="content-header">
-                <h1 class="content-title">NEW STORE OPENING (NSO) ROADMAP</h1>
-                <p class="content-subtitle">Source unique cross-department checklist.</p>
-            </div>
-            <div class="hero" style="padding: 40px; margin-bottom: 30px;">
-                <h1>Q4 Roadmap - Hong Kong Flagship</h1>
-                <button class="btn btn-gold">VIEW FULL CHECKLIST</button>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        © 2026 MAISON BULY 1803 — INTERNAL SOURCE UNIQUE & RETAIL ECOSYSTEM
-    </footer>
-
     <script>
-        function showPage(pageId) {
-            // Hide all pages
-            const pages = document.querySelectorAll('.app-page');
-            pages.forEach(page => page.classList.remove('active'));
-
-            // Remove active class from nav items
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => item.classList.remove('active'));
-
-            // Show selected page
-            const activePage = document.getElementById(pageId);
-            if (activePage) {
-                activePage.classList.add('active');
-            }
-
-            // Add active class to corresponding nav item
-            // Finding the correct item by its text content/index is easiest in this simple setup
-            const navMap = { 'home': 0, 'essence': 1, 'merch': 2, 'ops': 3, 'nso': 4, 'support': 5 };
-            const activeNavIndex = navMap[pageId];
-            if (navItems[activeNavIndex]) {
-                navItems[activeNavIndex].classList.add('active');
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        buly: {
+                            red: '#A6192E',        /* Rouge Officine Buly */
+                            reddark: '#801020',    /* Rouge sombre */
+                            navy: '#111111',       /* Bandeau noir header officiel */
+                            green: '#0D3B26',      /* Vert officiel Buly */
+                            gold: '#C5A059',       /* Dorure */
+                            goldlight: '#E6D2A3',
+                            parchment: '#FFFFFF',  /* Fond blanc épuré */
+                            cream: '#FAFAFA',       /* Fond très clair secondaire */
+                            border: '#E5E5E5',     /* Bordure subtile claire */
+                            dark: '#111111'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
             }
         }
     </script>
+    <style>
+        /* Modern Clean Buly Official Theme Scrollbar & Base Styles */
+        body {
+            background-color: #FFFFFF;
+            color: #222222;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        .buly-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+            transition: all 0.25s ease-in-out;
+        }
+
+        .buly-card:hover {
+            border-color: #A6192E;
+            box-shadow: 0 8px 30px -4px rgba(166, 25, 46, 0.08);
+        }
+
+        .buly-gold-border {
+            border-image: linear-gradient(to right, #A6192E, #C5A059, #A6192E) 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAFAFA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A6192E;
+            border-radius: 3px;
+        }
+
+        .tab-btn.active {
+            background-color: #A6192E;
+            color: #FFFFFF;
+            border-left: 4px solid #C5A059;
+        }
+
+        .nav-item.active {
+            color: #A6192E;
+            border-bottom: 2px solid #A6192E;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-buly-red selection:text-white">
+
+    <!-- TOP SHAREPOINT GLOBAL HEADER BAR (Style officiel bande noire) -->
+    <header class="bg-buly-navy text-white sticky top-0 z-50 shadow-md border-b border-buly-gold/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <!-- Brand & Portal Name -->
+                <div class="flex items-center space-x-3">
+                    <button id="mobile-menu-toggle" class="md:hidden text-buly-gold hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                    <!-- Buly Emblem SVG Logo -->
+                    <div class="w-10 h-10 rounded-full bg-buly-red flex items-center justify-center border border-buly-gold">
+                        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L15 8L21 9L16.5 13.5L18 19.5L12 16.5L6 19.5L7.5 13.5L3 9L9 8L12 2Z" fill="#C5A059" fill-opacity="0.3" stroke="#FFFFFF"/>
+                            <circle cx="12" cy="12" r="9" stroke="#C5A059" stroke-dasharray="1 2"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-cinzel tracking-widest text-xs uppercase text-buly-gold block font-bold">Officine Universelle Buly 1803</span>
+                        <h1 class="font-playfair text-sm font-semibold tracking-wide text-white">Global Retail & Store Opening Hub</h1>
+                    </div>
+                </div>
+
+                <!-- Global Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-md mx-8 relative">
+                    <input type="text" id="global-search" placeholder="Search guidelines, SOPs, Gravotech manuals, POSM..." 
+                           class="w-full bg-white/10 text-white placeholder-gray-300 text-xs rounded-full py-2 pl-9 pr-4 border border-white/20 focus:outline-none focus:border-buly-gold focus:ring-1 focus:ring-buly-gold transition-all">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-buly-gold text-xs"></i>
+                </div>
+
+                <!-- User & Language Controls -->
+                <div class="flex items-center space-x-4 text-xs">
+                    <span class="hidden sm:inline-block bg-buly-red text-white px-2.5 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider border border-buly-gold/40">
+                        <i class="fa-solid fa-globe mr-1"></i> Worldwide (EN)
+                    </span>
+                    <button class="relative p-1.5 text-gray-300 hover:text-buly-gold transition" title="Notifications">
+                        <i class="fa-regular fa-bell text-base"></i>
+                        <span class="absolute top-0 right-0 w-2 h-2 bg-buly-red rounded-full animate-ping"></span>
+                        <span class="absolute top-0 right-0 w-2 h-2 bg-buly-red rounded-full"></span>
+                    </button>
+                    <div class="flex items-center space-x-2 pl-2 border-l border-white/20">
+                        <div class="w-8 h-8 rounded-full bg-buly-red text-white font-cinzel font-bold flex items-center justify-center text-xs shadow-inner border border-buly-gold">
+                            HQ
+                        </div>
+                        <div class="hidden sm:block text-left">
+                            <span class="block text-white font-medium text-xs leading-none">Global Retail Ops</span>
+                            <span class="text-[10px] text-gray-400 leading-tight">Paris HQ • Admin</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS BAR -->
+    <nav class="bg-white border-b border-buly-border shadow-sm sticky top-16 z-40 hidden md:block">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-1 overflow-x-auto py-1 text-xs font-cinzel uppercase tracking-wider font-semibold">
+                <button onclick="switchTab('tab-home')" id="nav-tab-home" class="nav-item active px-4 py-2.5 whitespace-nowrap text-gray-700 hover:text-buly-red transition">
+                    <i class="fa-solid fa-house-chimney mr-1.5 text-buly-red"></i> 1. Home / News
+                </button>
+                <button onclick="switchTab('tab-brand')" id="nav-tab-brand" class="nav-item px-4 py-2.5 whitespace-nowrap text-gray-700 hover:text-buly-red transition">
+                    <i class="fa-solid fa-feather-pointed mr-1.5 text-buly-red"></i> 2. Brand Essence
+                </button>
+                <button onclick="switchTab('tab-products')" id="nav-tab-products" class="nav-item px-4 py-2.5 whitespace-nowrap text-gray-700 hover:text-buly-red transition">
+                    <i class="fa-solid fa-flask mr-1.5 text-buly-red"></i> 3. Products & Training
+                </button>
+                <button onclick="switchTab('tab-vm')" id="nav-tab-vm" class="nav-item px-4 py-2.5 whitespace-nowrap text-gray-700 hover:text-buly-red transition">
+                    <i class="fa-solid fa-pen-nib mr-1.5 text-buly-red"></i> 4. VM & Personalization
+                </button>
+                <button onclick="switchTab('tab-ops')" id="nav-tab-ops" class="nav-item px-4 py-2.5 whitespace-nowrap text-gray-700 hover:text-buly-red transition">
+                    <i class="fa-solid fa-store mr-1.5 text-buly-red"></i> 5. Boutique Ops
+                </button>
+                <button onclick="switchTab('tab-nso')" id="nav-tab-nso" class="nav-item px-4 py-2.5 whitespace-nowrap text-gray-700 hover:text-buly-red transition">
+                    <i class="fa-solid fa-rocket mr-1.5 text-buly-red"></i> 6. Store Opening Checklist
+                </button>
+                <button onclick="switchTab('tab-contacts')" id="nav-tab-contacts" class="nav-item px-4 py-2.5 whitespace-nowrap text-gray-700 hover:text-buly-red transition">
+                    <i class="fa-solid fa-address-book mr-1.5 text-buly-red"></i> 7. Contacts Directory
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU SIDEBAR (OVERLAY) -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black/70 z-50 hidden transition-opacity">
+        <div class="bg-white w-4/5 max-w-sm h-full p-6 overflow-y-auto border-r border-buly-red">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-buly-border">
+                <span class="font-cinzel text-sm font-bold text-buly-red">Navigation Menu</span>
+                <button id="mobile-menu-close" class="text-gray-700 hover:text-buly-red">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-2 font-cinzel text-xs uppercase tracking-wider font-semibold">
+                <button onclick="switchTab('tab-home'); closeMobileMenu()" class="w-full text-left p-3 rounded bg-buly-cream border border-buly-border text-gray-800">1. Home / News</button>
+                <button onclick="switchTab('tab-brand'); closeMobileMenu()" class="w-full text-left p-3 rounded bg-buly-cream border border-buly-border text-gray-800">2. Brand Essence</button>
+                <button onclick="switchTab('tab-products'); closeMobileMenu()" class="w-full text-left p-3 rounded bg-buly-cream border border-buly-border text-gray-800">3. Products & Training</button>
+                <button onclick="switchTab('tab-vm'); closeMobileMenu()" class="w-full text-left p-3 rounded bg-buly-cream border border-buly-border text-gray-800">4. VM & Personalization</button>
+                <button onclick="switchTab('tab-ops'); closeMobileMenu()" class="w-full text-left p-3 rounded bg-buly-cream border border-buly-border text-gray-800">5. Boutique Ops & Ceremonial</button>
+                <button onclick="switchTab('tab-nso'); closeMobileMenu()" class="w-full text-left p-3 rounded bg-buly-cream border border-buly-border text-gray-800">6. New Store Opening Roadmap</button>
+                <button onclick="switchTab('tab-contacts'); closeMobileMenu()" class="w-full text-left p-3 rounded bg-buly-cream border border-buly-border text-gray-800">7. Global Contacts Directory</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: HOME / NEWS HUB -->
+        <!-- ========================================== -->
+        <section id="tab-home" class="tab-content">
+            <!-- Hero Banner rouge officiel -->
+            <div class="relative rounded-lg overflow-hidden bg-buly-red text-white mb-8 border border-buly-gold shadow-xl">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#FFFFFF_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="relative p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="max-w-2xl">
+                        <span class="inline-block bg-white/20 text-white border border-white/40 text-[10px] uppercase font-cinzel tracking-widest px-3 py-1 rounded-full mb-3 font-bold">
+                            Global Retail Directive • Q4 Roadmap
+                        </span>
+                        <h2 class="font-playfair text-2xl md:text-4xl font-bold tracking-tight text-white leading-tight mb-4">
+                            Welcome to the Officine Universelle Buly Retail Hub
+                        </h2>
+                        <p class="font-serif italic text-white/90 text-sm md:text-base leading-relaxed mb-6">
+                            "An exquisite journey through timeless beauty, Parisian craftsmanship, and worldwide ceremonial excellence."
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="switchTab('tab-nso')" class="bg-buly-green hover:bg-opacity-90 text-white font-cinzel font-bold text-xs uppercase px-5 py-2.5 rounded shadow-md transition">
+                                <i class="fa-solid fa-compass mr-1.5"></i> Launch New Store (NSO Hub)
+                            </button>
+                            <button onclick="openModal('monthly-pack-modal')" class="border border-white text-white hover:bg-white/10 font-cinzel text-xs uppercase px-5 py-2.5 rounded transition">
+                                <i class="fa-solid fa-box-archive mr-1.5"></i> Download Monthly Pack
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Vector Illustration Hero Emblem -->
+                    <div class="w-48 h-48 md:w-56 md:h-56 flex-shrink-0 flex items-center justify-center p-4 bg-white/10 rounded-full border-2 border-buly-gold/60 shadow-inner">
+                        <svg class="w-full h-full text-buly-gold" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="90" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 4"/>
+                            <circle cx="100" cy="100" r="80" stroke="#C5A059" stroke-width="1"/>
+                            <!-- Calligraphic Buly Flacon SVG -->
+                            <path d="M85 50 H115 V65 H85 Z" fill="#C5A059" opacity="0.9"/>
+                            <rect x="90" y="35" width="20" height="15" rx="2" fill="#FFFFFF"/>
+                            <path d="M70 75 C70 65 130 65 130 75 L135 150 C135 160 125 170 100 170 C75 170 65 160 65 150 Z" fill="#A6192E" stroke="#FFFFFF" stroke-width="3"/>
+                            <rect x="78" y="90" width="44" height="60" rx="2" fill="#FFFFFF" stroke="#C5A059" stroke-width="1.5"/>
+                            <text x="100" y="115" font-family="Cinzel" font-size="10" font-weight="bold" fill="#A6192E" text-anchor="middle">BULY</text>
+                            <text x="100" y="130" font-family="Playfair Display" font-size="7" fill="#111111" text-anchor="middle">1803</text>
+                            <path d="M85 140 H115" stroke="#C5A059" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 Column Cards Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Highlights & What's New -->
+                <div class="buly-card p-6 rounded-lg">
+                    <div class="flex items-center justify-between pb-3 mb-4 border-b border-buly-border">
+                        <h3 class="font-cinzel text-sm font-bold text-buly-red tracking-wider uppercase">
+                            <i class="fa-solid fa-newspaper mr-2 text-buly-red"></i> Monthly Highlights
+                        </h3>
+                        <span class="text-[10px] bg-buly-cream px-2 py-0.5 rounded text-buly-red font-semibold border border-buly-border">Q4 Updates</span>
+                    </div>
+                    <ul class="space-y-3 text-xs">
+                        <li class="pb-2 border-b border-dashed border-buly-border">
+                            <span class="text-buly-red font-bold block text-[10px]">RETAIL LAUNCH</span>
+                            <a href="#" class="font-semibold text-gray-900 hover:text-buly-red transition">New Eau Triphonique Formulations - Global Rollout</a>
+                            <p class="text-gray-500 text-[11px] mt-0.5">Updated tester kits dispatch scheduled for next Tuesday.</p>
+                        </li>
+                        <li class="pb-2 border-b border-dashed border-buly-border">
+                            <span class="text-buly-red font-bold block text-[10px]">BOUTIQUE OPENINGS</span>
+                            <a href="#" class="font-semibold text-gray-900 hover:text-buly-red transition">Ginza Six Tokyo & Milan Galleria Openings</a>
+                            <p class="text-gray-500 text-[11px] mt-0.5">Check the live status in the NSO roadmap section.</p>
+                        </li>
+                        <li>
+                            <span class="text-buly-red font-bold block text-[10px]">COMPLIANCE</span>
+                            <a href="#" class="font-semibold text-gray-900 hover:text-buly-red transition">Gravotech Engraving Machine Maintenance</a>
+                            <p class="text-gray-500 text-[11px] mt-0.5">Mandatory font library update v3.4 for all worldwide stores.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Quick Action Links -->
+                <div class="buly-card p-6 rounded-lg">
+                    <div class="flex items-center justify-between pb-3 mb-4 border-b border-buly-border">
+                        <h3 class="font-cinzel text-sm font-bold text-buly-red tracking-wider uppercase">
+                            <i class="fa-solid fa-bolt mr-2 text-buly-gold"></i> Quick Tools & Forms
+                        </h3>
+                    </div>
+                    <div class="space-y-2.5">
+                        <button onclick="openModal('quality-modal')" class="w-full flex items-center justify-between p-3 rounded bg-buly-cream hover:bg-buly-red/5 border border-buly-border text-gray-800 text-xs font-medium transition group">
+                            <span class="flex items-center"><i class="fa-solid fa-triangle-exclamation text-buly-red mr-2.5"></i> Report Product Quality Issue</span>
+                            <i class="fa-solid fa-arrow-right text-buly-red opacity-0 group-hover:opacity-100 transition"></i>
+                        </button>
+                        <button onclick="openModal('posm-modal')" class="w-full flex items-center justify-between p-3 rounded bg-buly-cream hover:bg-buly-red/5 border border-buly-border text-gray-800 text-xs font-medium transition group">
+                            <span class="flex items-center"><i class="fa-solid fa-box-open text-buly-green mr-2.5"></i> Order POSM & Testers</span>
+                            <i class="fa-solid fa-arrow-right text-buly-red opacity-0 group-hover:opacity-100 transition"></i>
+                        </button>
+                        <button onclick="switchTab('tab-ops')" class="w-full flex items-center justify-between p-3 rounded bg-buly-cream hover:bg-buly-red/5 border border-buly-border text-gray-800 text-xs font-medium transition group">
+                            <span class="flex items-center"><i class="fa-solid fa-clipboard-check text-buly-gold mr-2.5"></i> Daily Opening/Closing Checklist</span>
+                            <i class="fa-solid fa-arrow-right text-buly-red opacity-0 group-hover:opacity-100 transition"></i>
+                        </button>
+                        <button onclick="switchTab('tab-brand')" class="w-full flex items-center justify-between p-3 rounded bg-buly-cream hover:bg-buly-red/5 border border-buly-border text-gray-800 text-xs font-medium transition group">
+                            <span class="flex items-center"><i class="fa-solid fa-pen-fancy text-buly-red mr-2.5"></i> Calligraphy Manual PDF</span>
+                            <i class="fa-solid fa-arrow-right text-buly-red opacity-0 group-hover:opacity-100 transition"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Key Events & Calendar -->
+                <div class="buly-card p-6 rounded-lg">
+                    <div class="flex items-center justify-between pb-3 mb-4 border-b border-buly-border">
+                        <h3 class="font-cinzel text-sm font-bold text-buly-red tracking-wider uppercase">
+                            <i class="fa-regular fa-calendar-check mr-2 text-buly-red"></i> Key Events Marketing (KEM)
+                        </h3>
+                        <span class="text-[10px] text-buly-red font-bold">2026 Calendar</span>
+                    </div>
+                    <div class="space-y-3 text-xs">
+                        <div class="flex items-start space-x-3 p-2 rounded hover:bg-buly-cream transition">
+                            <div class="bg-buly-red text-white font-cinzel text-center px-2 py-1 rounded w-12 flex-shrink-0">
+                                <span class="block text-[10px] uppercase">NOV</span>
+                                <span class="text-sm font-bold">15</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Holiday Season VM Setup</h4>
+                                <p class="text-gray-500 text-[11px]">Deploy winter holiday windows & gifting counters.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3 p-2 rounded hover:bg-buly-cream transition">
+                            <div class="bg-buly-navy text-white font-cinzel text-center px-2 py-1 rounded w-12 flex-shrink-0">
+                                <span class="block text-[10px] uppercase">DEC</span>
+                                <span class="text-sm font-bold">01</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Calligraphy Masterclass Briefing</h4>
+                                <p class="text-gray-500 text-[11px]">Worldwide livestream for store staff calligraphy training.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3 p-2 rounded hover:bg-buly-cream transition">
+                            <div class="bg-buly-green text-white font-cinzel text-center px-2 py-1 rounded w-12 flex-shrink-0">
+                                <span class="block text-[10px] uppercase">JAN</span>
+                                <span class="text-sm font-bold">10</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Annual Stock Audit (FIFO Check)</h4>
+                                <p class="text-gray-500 text-[11px]">Global inventory reconciliation across all boutiques.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: BRAND ESSENCE -->
+        <!-- ========================================== -->
+        <section id="tab-brand" class="tab-content hidden">
+            <div class="buly-card p-8 rounded-lg mb-8">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="font-cinzel text-xs text-buly-red tracking-widest uppercase font-bold">Heritage & Identity</span>
+                    <h2 class="font-playfair text-3xl font-bold text-buly-red mt-1 mb-3">The Art & Essence of Officine Universelle Buly</h2>
+                    <p class="text-gray-600 text-xs md:text-sm leading-relaxed">
+                        Founded in 1803, Officine Universelle Buly maintains an uncompromising commitment to French cosmetic excellence, historical calligraphy, and artisanal boutique design.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- History & Tone of Voice -->
+                    <div class="p-6 rounded border border-buly-border bg-buly-cream flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-full bg-buly-red/10 flex items-center justify-center text-buly-red mb-4">
+                                <i class="fa-solid fa-book-open text-xl"></i>
+                            </div>
+                            <h3 class="font-cinzel text-base font-bold text-gray-900 mb-2">History & Tone of Voice</h3>
+                            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+                                Our brand language is poetic, courteous, refined, and historically authentic. Explore the tone guidelines for client interaction and store signage.
+                            </p>
+                        </div>
+                        <button onclick="alert('Downloading Brand Heritage & Tone Guide (PDF)...')" class="text-xs font-cinzel font-bold text-buly-red hover:text-buly-gold flex items-center">
+                            <i class="fa-solid fa-file-pdf mr-2"></i> Download Guidelines PDF
+                        </button>
+                    </div>
+
+                    <!-- Visual Assets & Logos -->
+                    <div class="p-6 rounded border border-buly-border bg-buly-cream flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-full bg-buly-red/10 flex items-center justify-center text-buly-red mb-4">
+                                <i class="fa-solid fa-icons text-xl"></i>
+                            </div>
+                            <h3 class="font-cinzel text-base font-bold text-gray-900 mb-2">Logos & Official Typography</h3>
+                            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+                                Vector brand marks, coat-of-arms emblems, approved typography, and official color palettes (Buly Carmine Red, Ink Black, Parchment White).
+                            </p>
+                        </div>
+                        <button onclick="alert('Opening Official Asset Library Drive...')" class="text-xs font-cinzel font-bold text-buly-red hover:text-buly-gold flex items-center">
+                            <i class="fa-solid fa-folder-open mr-2"></i> Access Brand Assets Drive
+                        </button>
+                    </div>
+
+                    <!-- Calligraphy Art & Practice -->
+                    <div class="p-6 rounded border border-buly-border bg-buly-cream flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-full bg-buly-green/10 flex items-center justify-center text-buly-green mb-4">
+                                <i class="fa-solid fa-pen-fancy text-xl"></i>
+                            </div>
+                            <h3 class="font-cinzel text-base font-bold text-gray-900 mb-2">The Art of Calligraphy</h3>
+                            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+                                Calligraphy is our signature ritual. Access printable practice grids, nib maintenance guides, and Latin script standards for store staff.
+                            </p>
+                        </div>
+                        <button onclick="alert('Opening Calligraphy Masterclass Video Tutorials...')" class="text-xs font-cinzel font-bold text-buly-red hover:text-buly-gold flex items-center">
+                            <i class="fa-solid fa-circle-play mr-2"></i> Watch Calligraphy Tutorials
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Calligraphic SVG Motif Banner -->
+                <div class="mt-8 p-6 bg-buly-cream rounded-lg border border-buly-border text-center">
+                    <svg class="w-32 h-8 mx-auto text-buly-red mb-2" viewBox="0 0 200 40" fill="currentColor">
+                        <path d="M100 20 C60 0 40 40 0 20 C40 20 60 0 100 20 C140 40 160 20 200 20 C160 0 140 20 100 20 Z" opacity="0.5"/>
+                    </svg>
+                    <p class="font-playfair italic text-buly-red text-sm">
+                        "In every stroke of the pen and every gilded shelf lies two centuries of Parisian elegance."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: PRODUCTS & SALES TRAINING -->
+        <!-- ========================================== -->
+        <section id="tab-products" class="tab-content hidden">
+            <div class="buly-card p-6 rounded-lg mb-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-buly-border">
+                    <div>
+                        <h2 class="font-playfair text-2xl font-bold text-buly-red">Product Catalog & Training Modules</h2>
+                        <p class="text-xs text-gray-500 mt-0.5">Explore factsheets, pitch cards, FIFO guidelines, and stock management.</p>
+                    </div>
+                    <!-- Search Filter -->
+                    <div class="w-full sm:w-72 relative">
+                        <input type="text" id="product-search" onkeyup="filterProducts()" placeholder="Filter by name, EAN, range..." 
+                               class="w-full bg-buly-cream text-xs rounded py-2 pl-8 pr-3 border border-buly-border focus:outline-none focus:border-buly-red">
+                        <i class="fa-solid fa-filter absolute left-2.5 top-2.5 text-buly-red text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- Products Table / Grid -->
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left border-collapse" id="products-table">
+                        <thead>
+                            <tr class="bg-buly-cream font-cinzel text-[11px] text-buly-red uppercase tracking-wider border-b border-buly-border">
+                                <th class="p-3">Product Name</th>
+                                <th class="p-3">Category</th>
+                                <th class="p-3">Key Pitch Point</th>
+                                <th class="p-3">Shelf Life (FIFO)</th>
+                                <th class="p-3 text-right">Factsheet</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-xs divide-y divide-buly-border">
+                            <tr class="hover:bg-buly-cream transition">
+                                <td class="p-3 font-semibold text-gray-900 flex items-center space-x-2">
+                                    <span class="w-2 h-2 rounded-full bg-buly-red"></span>
+                                    <span>Eau Triphonique - Lichen d'Écosse</span>
+                                </td>
+                                <td class="p-3 text-gray-600">Water-Based Fragrance</td>
+                                <td class="p-3 text-gray-600">Alcohol-free, unique water emulsion, crisp moss & galbanum.</td>
+                                <td class="p-3 text-buly-green font-medium">36 Months</td>
+                                <td class="p-3 text-right">
+                                    <button onclick="alert('Opening Factsheet: Lichen d\'Écosse')" class="text-buly-red hover:text-buly-gold font-bold">
+                                        <i class="fa-solid fa-file-arrow-down mr-1"></i> PDF
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-buly-cream transition">
+                                <td class="p-3 font-semibold text-gray-900 flex items-center space-x-2">
+                                    <span class="w-2 h-2 rounded-full bg-buly-gold"></span>
+                                    <span>Huile Antique - Rose de Damas</span>
+                                </td>
+                                <td class="p-3 text-gray-600">Body Oil</td>
+                                <td class="p-3 text-gray-600">Inspired by ancient Greco-Roman cosmetic oils, nourishing & scented.</td>
+                                <td class="p-3 text-buly-green font-medium">24 Months</td>
+                                <td class="p-3 text-right">
+                                    <button onclick="alert('Opening Factsheet: Huile Antique')" class="text-buly-red hover:text-buly-gold font-bold">
+                                        <i class="fa-solid fa-file-arrow-down mr-1"></i> PDF
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-buly-cream transition">
+                                <td class="p-3 font-semibold text-gray-900 flex items-center space-x-2">
+                                    <span class="w-2 h-2 rounded-full bg-buly-green"></span>
+                                    <span>Pommade Concrète Hand Cream</span>
+                                </td>
+                                <td class="p-3 text-gray-600">Hand Care</td>
+                                <td class="p-3 text-gray-600">Iconic calligraphic serpent tube, shea butter & chamomile.</td>
+                                <td class="p-3 text-buly-green font-medium">18 Months</td>
+                                <td class="p-3 text-right">
+                                    <button onclick="alert('Opening Factsheet: Pommade Concrète')" class="text-buly-red hover:text-buly-gold font-bold">
+                                        <i class="fa-solid fa-file-arrow-down mr-1"></i> PDF
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-buly-cream transition">
+                                <td class="p-3 font-semibold text-gray-900 flex items-center space-x-2">
+                                    <span class="w-2 h-2 rounded-full bg-buly-red"></span>
+                                    <span>Acetate Hair Combs (Personalized)</span>
+                                </td>
+                                <td class="p-3 text-gray-600">Accessories</td>
+                                <td class="p-3 text-gray-600">Handcrafted plant-based acetate, customized with Gravotech engraving.</td>
+                                <td class="p-3 text-gray-500 font-medium">N/A</td>
+                                <td class="p-3 text-right">
+                                    <button onclick="alert('Opening Accessories Specs PDF')" class="text-buly-red hover:text-buly-gold font-bold">
+                                        <i class="fa-solid fa-file-arrow-down mr-1"></i> PDF
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Quality & FIFO Rules Box -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-5 rounded bg-buly-cream border border-buly-border">
+                        <h4 class="font-cinzel text-xs font-bold text-buly-red uppercase mb-2">
+                            <i class="fa-solid fa-rotate mr-1.5"></i> First-In, First-Out (FIFO) Protocol
+                        </h4>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                            Always place newly delivered batches behind older inventory on sales fixtures and stockrooms. Check batch codes monthly.
+                        </p>
+                        <a href="#" onclick="alert('Opening Batch Code Verification Tool')" class="text-xs text-buly-red font-bold hover:underline">
+                            How to decipher Buly Batch Codes &rrarr;
+                        </a>
+                    </div>
+                    <div class="p-5 rounded bg-buly-cream border border-buly-border">
+                        <h4 class="font-cinzel text-xs font-bold text-buly-red uppercase mb-2">
+                            <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Damaged Goods & Defect Workflow
+                        </h4>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                            Any damaged item or seal leakage must be isolated and logged using our digital incident report form within 24 hours.
+                        </p>
+                        <button onclick="openModal('quality-modal')" class="text-xs bg-buly-red text-white px-3 py-1.5 rounded font-cinzel font-bold hover:bg-buly-reddark transition">
+                            Open Quality Incident Form
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: VM, POSM & PERSONALIZATION -->
+        <!-- ========================================== -->
+        <section id="tab-vm" class="tab-content hidden">
+            <div class="buly-card p-6 rounded-lg mb-8">
+                <div class="mb-8 border-b border-buly-border pb-4">
+                    <h2 class="font-playfair text-2xl font-bold text-buly-red">Visual Merchandising & Personalization Machines</h2>
+                    <p class="text-xs text-gray-500 mt-1">In-store display standards, Gravotech engraving calibration, and leather embossing machines.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Gravotech Engraving Section -->
+                    <div class="border border-buly-border rounded-lg p-6 bg-buly-cream">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-10 h-10 rounded bg-buly-red text-white flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-gears text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-cinzel text-sm font-bold text-gray-900">Gravotech M20 Engraving Machine</h3>
+                                <span class="text-[10px] text-buly-red font-bold uppercase">Personalization Technical Hub</span>
+                            </div>
+                        </div>
+
+                        <!-- Vector Graphic Outline of Engraving Machine -->
+                        <div class="my-4 p-4 bg-white rounded border border-buly-border text-center flex justify-center">
+                            <svg class="w-48 h-32 text-buly-red" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="30" y="70" width="140" height="35" rx="4" fill="#111111" stroke="#A6192E" stroke-width="2"/>
+                                <rect x="50" y="20" width="100" height="50" rx="3" fill="#FAFAFA" stroke="#111111" stroke-width="2"/>
+                                <circle cx="100" cy="45" r="15" stroke="#C5A059" stroke-width="2" stroke-dasharray="2 2"/>
+                                <line x1="100" y1="30" x2="100" y2="60" stroke="#A6192E" stroke-width="2"/>
+                                <rect x="70" y="80" width="60" height="15" rx="2" fill="#A6192E"/>
+                                <text x="100" y="91" font-family="Cinzel" font-size="7" fill="#FFFFFF" text-anchor="middle" font-weight="bold">GRAVOTECH M20</text>
+                            </svg>
+                        </div>
+
+                        <div class="space-y-2 text-xs">
+                            <div class="flex justify-between py-1 border-b border-buly-border">
+                                <span class="text-gray-600">Approved Fonts:</span>
+                                <span class="font-bold text-gray-900">Buly English Script, Buly Roman 1803</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-buly-border">
+                                <span class="text-gray-600">Diamond Tip Replacement:</span>
+                                <span class="font-bold text-gray-900">Every 500 Engravings</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-buly-border">
+                                <span class="text-gray-600">Supported Items:</span>
+                                <span class="font-bold text-gray-900">Combs, Lip Balm Cases, Flasks</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex space-x-3">
+                            <button onclick="alert('Downloading Gravotech Calibration Manual (PDF)...')" class="flex-1 bg-buly-red text-white text-xs font-cinzel py-2 rounded font-bold hover:bg-buly-reddark transition">
+                                <i class="fa-solid fa-download mr-1"></i> Tech Manual
+                            </button>
+                            <button onclick="alert('Opening Font Installation File Pack...')" class="flex-1 border border-buly-red text-buly-red text-xs font-cinzel py-2 rounded font-bold hover:bg-buly-red/10 transition">
+                                <i class="fa-solid fa-font mr-1"></i> Font Pack
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Leather Embossing & VM Photo Validation -->
+                    <div class="space-y-6">
+                        <!-- Leather Embossing -->
+                        <div class="border border-buly-border rounded-lg p-6 bg-buly-cream">
+                            <h3 class="font-cinzel text-sm font-bold text-gray-900 mb-2">
+                                <i class="fa-solid fa-stamp text-buly-red mr-2"></i> Hot Foil Leather Embossing Machine
+                            </h3>
+                            <p class="text-xs text-gray-600 mb-3">
+                                Standard operating temperature: 110°C - 120°C. Always perform a test on leather swatch before applying gold foil to client goods.
+                            </p>
+                            <a href="#" onclick="alert('Opening Embossing Safety Checklist')" class="text-xs text-buly-red font-bold hover:underline">
+                                View Heat Safety & Foil Setup Checklist &rrarr;
+                            </a>
+                        </div>
+
+                        <!-- VM Photo Upload Workflow -->
+                        <div class="border border-buly-border rounded-lg p-6 bg-buly-cream">
+                            <h3 class="font-cinzel text-sm font-bold text-gray-900 mb-2">
+                                <i class="fa-solid fa-camera-retro text-buly-red mr-2"></i> Monthly VM Photo Submission
+                            </h3>
+                            <p class="text-xs text-gray-600 mb-4">
+                                Boutique managers must submit monthly photos of counter setups, window displays, and velvet tray arrangements by the 5th of each month.
+                            </p>
+                            <button onclick="openModal('vm-upload-modal')" class="w-full bg-buly-green text-white font-cinzel font-bold text-xs py-2.5 rounded shadow hover:bg-opacity-90 transition">
+                                <i class="fa-solid fa-cloud-arrow-up mr-2"></i> Submit Boutique Display Photos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 5: BOUTIQUE OPS & CEREMONIAL -->
+        <!-- ========================================== -->
+        <section id="tab-ops" class="tab-content hidden">
+            <div class="buly-card p-6 rounded-lg mb-8">
+                <div class="mb-6 border-b border-buly-border pb-4">
+                    <h2 class="font-playfair text-2xl font-bold text-buly-red">Boutique Ceremonial & Retail Operations</h2>
+                    <p class="text-xs text-gray-500 mt-1">Grooming standards, wrapping ceremonies, Infoware POS guides, and daily store checklists.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Ceremonial Packaging -->
+                    <div class="p-5 rounded border border-buly-border bg-buly-cream text-center">
+                        <div class="w-12 h-12 rounded-full bg-buly-red/10 text-buly-red mx-auto flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-gift text-xl"></i>
+                        </div>
+                        <h3 class="font-cinzel text-sm font-bold text-gray-900 mb-1">Gifting & Wax Seal Ritual</h3>
+                        <p class="text-xs text-gray-600 mb-3">Learn the exact origami box fold, velvet ribbon tie, and hot wax sealing procedure.</p>
+                        <button onclick="alert('Opening Wax Sealing Tutorial Video')" class="text-xs text-buly-red font-bold hover:underline">
+                            Watch Video Guide
+                        </button>
+                    </div>
+
+                    <!-- Grooming & Uniform -->
+                    <div class="p-5 rounded border border-buly-border bg-buly-cream text-center">
+                        <div class="w-12 h-12 rounded-full bg-buly-red/10 text-buly-red mx-auto flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-user-tie text-xl"></i>
+                        </div>
+                        <h3 class="font-cinzel text-sm font-bold text-gray-900 mb-1">Grooming & Uniform Standards</h3>
+                        <p class="text-xs text-gray-600 mb-3">Dress code, lapel pin placement, apron care, and French etiquette in store.</p>
+                        <button onclick="alert('Opening Grooming Guidelines PDF')" class="text-xs text-buly-red font-bold hover:underline">
+                            Download Policy PDF
+                        </button>
+                    </div>
+
+                    <!-- Infoware POS -->
+                    <div class="p-5 rounded border border-buly-border bg-buly-cream text-center">
+                        <div class="w-12 h-12 rounded-full bg-buly-red/10 text-buly-red mx-auto flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-calculator text-xl"></i>
+                        </div>
+                        <h3 class="font-cinzel text-sm font-bold text-gray-900 mb-1">Infoware POS & Tax-Free</h3>
+                        <p class="text-xs text-gray-600 mb-3">Cash register routines, tax-free export forms, return processing, and daily closing.</p>
+                        <button onclick="alert('Opening Infoware POS Manual')" class="text-xs text-buly-red font-bold hover:underline">
+                            Infoware Quick Guide
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Daily Checklists Interactive Accordion -->
+                <div class="border border-buly-border rounded-lg p-6 bg-white">
+                    <h3 class="font-cinzel text-sm font-bold text-buly-red mb-4 flex items-center">
+                        <i class="fa-solid fa-list-check text-buly-gold mr-2"></i> Daily Boutique Opening & Closing Protocol
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                        <!-- Opening Checklist -->
+                        <div class="p-4 rounded bg-buly-cream border border-buly-border">
+                            <h4 class="font-cinzel font-bold text-buly-red uppercase mb-3 pb-1 border-b border-buly-border">Morning Opening (T-30 Mins)</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="rounded text-buly-red focus:ring-buly-red">
+                                    <span>Disable alarm & unlock entrance doors</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="rounded text-buly-red focus:ring-buly-red">
+                                    <span>Turn on brass chandeliers & counter spot lighting</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="rounded text-buly-red focus:ring-buly-red">
+                                    <span>Power on Infoware POS terminal & verify cash float</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="rounded text-buly-red focus:ring-buly-red">
+                                    <span>Polish marble counters & dust glass display jars</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="rounded text-buly-red focus:ring-buly-red">
+                                    <span>Prepare calligraphy ink wells and fresh nibs</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Closing Checklist -->
+                        <div class="p-4 rounded bg-buly-cream border border-buly-border">
+                            <h4 class="font-cinzel font-bold text-buly-red uppercase mb-3 pb-1 border-b border-buly-border">Evening Closing (T+30 Mins)</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="rounded text-buly-red focus:ring-buly-red">
+                                    <span>Reconcile daily Infoware POS sales & Z-Report</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="rounded text-buly-red focus:ring-buly-red">
+                                    <span>Secure cash drawer in store safe</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="rounded text-buly-red focus:ring-buly-red">
+                                    <span>Cap ink bottles & clean calligraphy nibs</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="rounded text-buly-red focus:ring-buly-red">
+                                    <span>Power down Gravotech engraving machine</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="rounded text-buly-red focus:ring-buly-red">
+                                    <span>Lock store, activate perimeter alarm system</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 6: NEW STORE OPENING (NSO) CHECKLIST -->
+        <!-- ========================================== -->
+        <section id="tab-nso" class="tab-content hidden">
+            <div class="buly-card p-6 rounded-lg mb-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-buly-border">
+                    <div>
+                        <span class="text-[10px] bg-buly-red/10 text-buly-red border border-buly-red/30 px-2.5 py-0.5 rounded-full font-cinzel font-bold">Cross-Department Master Checklist</span>
+                        <h2 class="font-playfair text-2xl font-bold text-buly-red mt-1">New Store Opening (NSO) Interactive Roadmap</h2>
+                        <p class="text-xs text-gray-500">From T-90 Days to Grand Opening Day. Track progress across Merch, HR, VM, and IT.</p>
+                    </div>
+
+                    <!-- Progress Indicator -->
+                    <div class="bg-buly-cream p-4 rounded-lg border border-buly-border w-full md:w-64">
+                        <div class="flex justify-between items-center text-xs mb-1">
+                            <span class="font-cinzel font-bold text-gray-900">Overall Completion</span>
+                            <span id="nso-progress-text" class="font-bold text-buly-red">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden">
+                            <div id="nso-progress-bar" class="bg-buly-red h-full w-0 transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Stages Header -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 my-6 text-center font-cinzel text-xs font-bold">
+                    <div class="p-3 bg-buly-navy text-white rounded border border-buly-gold">
+                        Stage 1: T-90 to T-60
+                        <span class="block text-[10px] font-normal text-gray-300">Architecture & Ops</span>
+                    </div>
+                    <div class="p-3 bg-buly-red text-white rounded border border-buly-red">
+                        Stage 2: T-60 to T-30
+                        <span class="block text-[10px] font-normal text-gray-100">HR & Training</span>
+                    </div>
+                    <div class="p-3 bg-buly-green text-white rounded border border-buly-green">
+                        Stage 3: T-30 to T-7
+                        <span class="block text-[10px] font-normal text-gray-100">VM & Machine Setup</span>
+                    </div>
+                    <div class="p-3 bg-buly-gold text-white rounded border border-buly-gold">
+                        Stage 4: D-Day Launch
+                        <span class="block text-[10px] font-normal text-white">Grand Opening</span>
+                    </div>
+                </div>
+
+                <!-- Interactive NSO Tasks List -->
+                <div class="space-y-4" id="nso-checklist-container">
+                    
+                    <!-- Department: HR & Training -->
+                    <div class="border border-buly-border rounded bg-buly-cream p-4">
+                        <h3 class="font-cinzel text-xs font-bold text-buly-red uppercase mb-3 flex items-center">
+                            <i class="fa-solid fa-users text-buly-red mr-2"></i> HR & Training Deliverables
+                        </h3>
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-white rounded transition">
+                                <input type="checkbox" onchange="updateNSOProgress()" class="nso-task rounded text-buly-red focus:ring-buly-red w-4 h-4">
+                                <span class="font-medium text-gray-900">[T-60] Recruit Store Director & Lead Calligraphers</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-white rounded transition">
+                                <input type="checkbox" onchange="updateNSOProgress()" class="nso-task rounded text-buly-red focus:ring-buly-red w-4 h-4">
+                                <span class="font-medium text-gray-900">[T-30] Conduct Paris HQ / Onsite Brand Immersion Masterclass</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-white rounded transition">
+                                <input type="checkbox" onchange="updateNSOProgress()" class="nso-task rounded text-buly-red focus:ring-buly-red w-4 h-4">
+                                <span class="font-medium text-gray-900">[T-15] Order & Fit Staff Uniforms (Aprons, Pins, Lapel Badges)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Department: Visual Merchandising & POSM -->
+                    <div class="border border-buly-border rounded bg-buly-cream p-4">
+                        <h3 class="font-cinzel text-xs font-bold text-buly-red uppercase mb-3 flex items-center">
+                            <i class="fa-solid fa-pen-nib text-buly-red mr-2"></i> Merchandising & Technical Machines
+                        </h3>
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-white rounded transition">
+                                <input type="checkbox" onchange="updateNSOProgress()" class="nso-task rounded text-buly-red focus:ring-buly-red w-4 h-4">
+                                <span class="font-medium text-gray-900">[T-30] Deliver POSM Testers, Glass Jars, and Display Velvet Trays</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-white rounded transition">
+                                <input type="checkbox" onchange="updateNSOProgress()" class="nso-task rounded text-buly-red focus:ring-buly-red w-4 h-4">
+                                <span class="font-medium text-gray-900">[T-14] Install Gravotech M20 Engraving & Leather Embossing Machines</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-white rounded transition">
+                                <input type="checkbox" onchange="updateNSOProgress()" class="nso-task rounded text-buly-red focus:ring-buly-red w-4 h-4">
+                                <span class="font-medium text-gray-900">[T-7] Validate Window Display Arrangement with HQ VM Team</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Department: IT, Supply Chain & Retail Ops -->
+                    <div class="border border-buly-border rounded bg-buly-cream p-4">
+                        <h3 class="font-cinzel text-xs font-bold text-buly-red uppercase mb-3 flex items-center">
+                            <i class="fa-solid fa-boxes-packing text-buly-red mr-2"></i> IT, Supply Chain & Operations
+                        </h3>
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-white rounded transition">
+                                <input type="checkbox" onchange="updateNSOProgress()" class="nso-task rounded text-buly-red focus:ring-buly-red w-4 h-4">
+                                <span class="font-medium text-gray-900">[T-45] Initial Inventory Shipment Arrival (Fragrances, Oils, Combs)</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-white rounded transition">
+                                <input type="checkbox" onchange="updateNSOProgress()" class="nso-task rounded text-buly-red focus:ring-buly-red w-4 h-4">
+                                <span class="font-medium text-gray-900">[T-10] Infoware POS Hardware Setup, Receipt Printers & Scanner Test</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer p-1.5 hover:bg-white rounded transition">
+                                <input type="checkbox" onchange="updateNSOProgress()" class="nso-task rounded text-buly-red focus:ring-buly-red w-4 h-4">
+                                <span class="font-medium text-gray-900">[D-Day] Soft Opening & Ceremony Approval Sign-off</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Print / Export Checklist Button -->
+                <div class="mt-6 flex justify-end">
+                    <button onclick="window.print()" class="bg-buly-red text-white border border-buly-red font-cinzel text-xs font-bold px-4 py-2 rounded hover:bg-buly-reddark transition">
+                        <i class="fa-solid fa-print mr-1.5"></i> Print Opening Checklist
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 7: CONTACTS DIRECTORY -->
+        <!-- ========================================== -->
+        <section id="tab-contacts" class="tab-content hidden">
+            <div class="buly-card p-6 rounded-lg mb-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-buly-border">
+                    <div>
+                        <h2 class="font-playfair text-2xl font-bold text-buly-red">Global Support & Directory</h2>
+                        <p class="text-xs text-gray-500">Cross-department support desk and SLA turnarounds.</p>
+                    </div>
+                    <!-- Contact Filter Search -->
+                    <div class="w-full sm:w-72 relative">
+                        <input type="text" id="contact-search" onkeyup="filterContacts()" placeholder="Search by name, department, SLA..." 
+                               class="w-full bg-buly-cream text-xs rounded py-2 pl-8 pr-3 border border-buly-border focus:outline-none focus:border-buly-red">
+                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-buly-red text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- Contact Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6" id="contacts-grid">
+                    
+                    <!-- Contact 1: Human Resources -->
+                    <div class="p-5 rounded border border-buly-border bg-buly-cream contact-card">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-[10px] bg-buly-red/10 text-buly-red border border-buly-red/30 font-bold px-2 py-0.5 rounded uppercase">Human Resources</span>
+                            <span class="text-[10px] bg-green-100 text-green-800 font-semibold px-2 py-0.5 rounded">SLA: 24-48 Hours</span>
+                        </div>
+                        <h3 class="font-cinzel font-bold text-gray-900 text-sm">Global HR & Training Team</h3>
+                        <p class="text-xs text-gray-500 mb-3">Onboarding, Calligraphy Training & Uniform Requests</p>
+                        <div class="space-y-1.5 text-xs text-gray-600 border-t border-buly-border pt-3">
+                            <p class="flex items-center"><i class="fa-solid fa-envelope text-buly-red mr-2 w-4"></i> hr-global@buly1803.com</p>
+                            <p class="flex items-center"><i class="fa-solid fa-phone text-buly-red mr-2 w-4"></i> +33 1 42 60 00 18</p>
+                        </div>
+                    </div>
+
+                    <!-- Contact 2: Gravotech Tech Support -->
+                    <div class="p-5 rounded border border-buly-border bg-buly-cream contact-card">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-[10px] bg-black/10 text-black border border-black/30 font-bold px-2 py-0.5 rounded uppercase">Technical Hardware</span>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 font-semibold px-2 py-0.5 rounded">SLA: Urgent / 12 hrs</span>
+                        </div>
+                        <h3 class="font-cinzel font-bold text-gray-900 text-sm">Gravotech & Machine Support</h3>
+                        <p class="text-xs text-gray-500 mb-3">Engraving Machine Calibration & Hardware Faults</p>
+                        <div class="space-y-1.5 text-xs text-gray-600 border-t border-buly-border pt-3">
+                            <p class="flex items-center"><i class="fa-solid fa-envelope text-buly-red mr-2 w-4"></i> tech-support@buly1803.com</p>
+                            <p class="flex items-center"><i class="fa-solid fa-phone text-buly-red mr-2 w-4"></i> +33 1 42 60 00 99</p>
+                        </div>
+                    </div>
+
+                    <!-- Contact 3: Global VM & Merchandising -->
+                    <div class="p-5 rounded border border-buly-border bg-buly-cream contact-card">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-[10px] bg-buly-green/10 text-buly-green border border-buly-green/30 font-bold px-2 py-0.5 rounded uppercase">Merchandising</span>
+                            <span class="text-[10px] bg-green-100 text-green-800 font-semibold px-2 py-0.5 rounded">SLA: 48 Hours</span>
+                        </div>
+                        <h3 class="font-cinzel font-bold text-gray-900 text-sm">Visual Merchandising HQ</h3>
+                        <p class="text-xs text-gray-500 mb-3">Window Display Approvals & POSM Orders</p>
+                        <div class="space-y-1.5 text-xs text-gray-600 border-t border-buly-border pt-3">
+                            <p class="flex items-center"><i class="fa-solid fa-envelope text-buly-red mr-2 w-4"></i> vm-approval@buly1803.com</p>
+                            <p class="flex items-center"><i class="fa-solid fa-phone text-buly-red mr-2 w-4"></i> +33 1 42 60 00 24</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-buly-navy text-white py-6 border-t border-buly-gold/30 text-xs mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="font-cinzel text-buly-gold font-bold tracking-widest uppercase mb-1">Officine Universelle Buly 1803</p>
+            <p class="text-[11px] opacity-75">Global Retail & Store Opening SharePoint Portal • Confidential Internal Documentation</p>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- MODALS & POPUPS (INTERACTIVE) -->
+    <!-- ========================================== -->
+
+    <!-- QUALITY REPORT MODAL -->
+    <div id="quality-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-lg max-w-lg w-full p-6 border border-buly-red shadow-2xl relative">
+            <button onclick="closeModal('quality-modal')" class="absolute top-4 right-4 text-gray-700 hover:text-buly-red">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="font-cinzel font-bold text-buly-red text-base mb-1">Report Quality or Defect Issue</h3>
+            <p class="text-xs text-gray-600 mb-4">Please fill in product batch information and defect description.</p>
+            
+            <form onsubmit="event.preventDefault(); alert('Incident report successfully submitted to Global QA Team.'); closeModal('quality-modal');" class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-semibold mb-1 text-gray-900">Boutique Location</label>
+                    <input type="text" required placeholder="e.g. Ginza Tokyo / Paris Saintonge" class="w-full p-2 rounded border border-buly-border bg-buly-cream">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1 text-gray-900">Product Name & Batch Code</label>
+                    <input type="text" required placeholder="e.g. Eau Triphonique Lichen - Batch #2026A" class="w-full p-2 rounded border border-buly-border bg-buly-cream">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1 text-gray-900">Defect Type</label>
+                    <select class="w-full p-2 rounded border border-buly-border bg-buly-cream">
+                        <option>Packaging / Pump Leakage</option>
+                        <option>Calligraphy Label Damage</option>
+                        <option>Formula / Scent Alteration</option>
+                        <option>Broken Glass / Jar</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1 text-gray-900">Description</label>
+                    <textarea rows="3" required placeholder="Describe the issue in detail..." class="w-full p-2 rounded border border-buly-border bg-buly-cream"></textarea>
+                </div>
+                <div class="pt-2 flex justify-end space-x-2">
+                    <button type="button" onclick="closeModal('quality-modal')" class="px-4 py-2 border border-buly-border rounded text-gray-700 font-cinzel">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-buly-red text-white rounded font-cinzel font-bold">Submit Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- VM UPLOAD MODAL -->
+    <div id="vm-upload-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-lg max-w-lg w-full p-6 border border-buly-red shadow-2xl relative">
+            <button onclick="closeModal('vm-upload-modal')" class="absolute top-4 right-4 text-gray-700 hover:text-buly-red">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="font-cinzel font-bold text-buly-red text-base mb-1">Submit Monthly VM Display Photos</h3>
+            <p class="text-xs text-gray-600 mb-4">Upload counter and window arrangement photos for HQ validation.</p>
+            
+            <form onsubmit="event.preventDefault(); alert('VM photos uploaded successfully for review!'); closeModal('vm-upload-modal');" class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-semibold mb-1 text-gray-900">Store Name</label>
+                    <input type="text" required placeholder="e.g. Milan Galleria" class="w-full p-2 rounded border border-buly-border bg-buly-cream">
+                </div>
+                <div class="border-2 border-dashed border-buly-red/40 p-6 rounded text-center bg-buly-cream">
+                    <i class="fa-solid fa-images text-2xl text-buly-red mb-2"></i>
+                    <p class="font-semibold text-gray-900">Drag & Drop store photos here</p>
+                    <p class="text-[10px] text-gray-500 mt-0.5">Supports JPG, PNG (Max 15MB total)</p>
+                </div>
+                <div class="pt-2 flex justify-end space-x-2">
+                    <button type="button" onclick="closeModal('vm-upload-modal')" class="px-4 py-2 border border-buly-border rounded text-gray-700 font-cinzel">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-buly-green text-white rounded font-cinzel font-bold">Upload Photos</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // TAB SWITCHING FUNCTION
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            // Remove active class from all nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // Show target tab content
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.remove('hidden');
+            }
+
+            // Set active class on corresponding nav button
+            const activeNav = document.getElementById('nav-' + tabId);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // MOBILE MENU CONTROLS
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+            });
+        }
+
+        if (mobileMenuClose && mobileMenu) {
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        }
+
+        function closeMobileMenu() {
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+        }
+
+        // MODAL OPEN / CLOSE LOGIC
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.add('hidden');
+        }
+
+        // NSO CHECKLIST PROGRESS CALCULATOR
+        function updateNSOProgress() {
+            const checkboxes = document.querySelectorAll('.nso-task');
+            if (checkboxes.length === 0) return;
+
+            let checkedCount = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) checkedCount++;
+            });
+
+            const percentage = Math.round((checkedCount / checkboxes.length) * 100);
+            
+            const progressBar = document.getElementById('nso-progress-bar');
+            const progressText = document.getElementById('nso-progress-text');
+
+            if (progressBar && progressText) {
+                progressBar.style.width = percentage + '%';
+                progressText.innerText = percentage + '%';
+            }
+        }
+
+        // FILTER PRODUCTS IN TABLE
+        function filterProducts() {
+            const input = document.getElementById('product-search');
+            if (!input) return;
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('products-table');
+            const trs = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < trs.length; i++) {
+                const tdText = trs[i].innerText.toLowerCase();
+                if (tdText.indexOf(filter) > -1) {
+                    trs[i].style.display = "";
+                } else {
+                    trs[i].style.display = "none";
+                }
+            }
+        }
+
+        // FILTER CONTACTS IN DIRECTORY
+        function filterContacts() {
+            const input = document.getElementById('contact-search');
+            if (!input) return;
+            const filter = input.value.toLowerCase();
+            const cards = document.querySelectorAll('.contact-card');
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.indexOf(filter) > -1) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // INITIALIZE PROGRESS ON LOAD
+        window.onload = function() {
+            updateNSOProgress();
+        };
+    </script>
+
 </body>
 </html>
